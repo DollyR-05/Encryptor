@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Encryptor: Cipher Converter</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-in">
+      <div class="logo">🔐</div>
+      <h1>Encryptor</h1>
+      <p>Pick a method, enter a key and watch your text convert instantly.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="card controls">
+      <label class="field">
+        <span>Method</span>
+        <select id="method">
+          <option value="monoalphabetic">Monoalphabetic (substitution)</option>
+          <option value="vigenere">Polyalphabetic (Vigenère)</option>
+          <option value="playfair">Playfair (letter pairs)</option>
+          <option value="polybius">Polybius (grid to numbers)</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span id="keyLabel">Keyword</span>
+        <input id="key" autocomplete="off" spellcheck="false">
+      </label>
+
+      <div class="field">
+        <span>Direction</span>
+        <div class="seg" id="action">
+          <button data-a="encrypt" class="on">Encrypt</button>
+          <button data-a="decrypt">Decrypt</button>
+        </div>
+      </div>
+
+      <div id="hint" class="info"></div>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <b id="inLabel">Plain text</b><span id="count" class="muted">0 characters</span>
+        <span class="sp"></span>
+        <button id="example" class="ghost">Try example</button>
+        <button id="clear" class="ghost">Clear</button>
+      </div>
+      <textarea id="input" placeholder="Type or paste text here…"></textarea>
+    </section>
+
+    <div id="status" class="status"></div>
+
+    <section class="card result">
+      <div class="row">
+        <b id="outLabel">Cipher text</b>
+        <span class="sp"></span>
+        <button id="swap" class="ghost">⇅ Use as input</button>
+        <button id="copy" class="primary">Copy</button>
+      </div>
+      <div id="output" class="out"></div>
+    </section>
+
+    <section class="card" id="tableCard" hidden>
+      <h2 id="tableTitle">Key table</h2>
+      <div id="table"></div>
+    </section>
+  </main>
+
+  <footer>Encryptor · classical ciphers for learning, not for protecting real secrets</footer>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
